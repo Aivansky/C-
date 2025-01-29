@@ -1,0 +1,53 @@
+// hello.service.ts:
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class HelloService {
+  private apiUrl = 'http://localhost:5000/api/hello';
+
+  constructor(private http: HttpClient) {}
+
+  getMessage(): Observable<any> {
+    return this.http.get<any>(this.apiUrl);
+  }
+}
+
+//app.module.ts
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, HttpClientModule],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+
+
+//app.component.ts
+import { Component, OnInit } from '@angular/core';
+import { HelloService } from './hello.service';
+
+@Component({
+  selector: 'app-root',
+  template: `<h1>{{ message }}</h1>`,
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent implements OnInit {
+  message = '';
+
+  constructor(private helloService: HelloService) {}
+
+  ngOnInit() {
+    this.helloService.getMessage().subscribe(data => {
+      this.message = data.message;
+    });
+  }
+}
