@@ -1,0 +1,18 @@
+Backend
+sh
+dotnet new webapi -n MyApp
+cd MyApp
+
+sh
+dotnet run
+
+Frontend
+sh
+ng new my-angular-app
+cd my-angular-app
+
+sh
+ng generate service hello
+
+sh
+ng serve
