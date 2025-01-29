@@ -1,0 +1,34 @@
+//WeatherForecastController.cs
+using Microsoft.AspNetCore.Mvc;
+
+[ApiController]
+[Route("api/[controller]")]
+public class HelloController : ControllerBase
+{
+    [HttpGet]
+    public IActionResult GetMessage()
+    {
+        return Ok(new { message = "Hello from C# API!" });
+    }
+}
+
+//inside Program.cs
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular",
+        policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+});
+
+builder.Services.AddControllers();
+var app = builder.Build();
+
+app.UseCors("AllowAngular");
+app.UseAuthorization();
+app.MapControllers();
+
+app.Run();
+
+
+
