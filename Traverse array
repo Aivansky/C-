@@ -1,0 +1,32 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Sample array
+        int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+        // Method 1: Using a for loop
+        Console.WriteLine("Traversing with a for loop:");
+        for (int i = 0; i < numbers.Length; i++)
+        {
+            Console.WriteLine(numbers[i]);
+        }
+
+        // Method 2: Using a foreach loop
+        Console.WriteLine("\nTraversing with a foreach loop:");
+        foreach (var num in numbers)
+        {
+            Console.WriteLine(num);
+        }
+
+        // Method 3: Using LINQ (if you want to use LINQ to traverse)
+        Console.WriteLine("\nTraversing with LINQ:");
+        var result = numbers.Select(num => num); // Using LINQ to select all elements
+        foreach (var num in result)
+        {
+            Console.WriteLine(num);
+        }
+    }
+}
